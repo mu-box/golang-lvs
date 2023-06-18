@@ -1,4 +1,4 @@
-#  Golang LVS ![Build Status Image](https://travis-ci.org/nanobox-io/golang-lvs.svg)
+#  Golang LVS ![Build Status Image](https://github.com/mu-box/golang-lvs/actions/workflows/ci.yaml/badge.svg)
 
 A small wrapper around ipvsadm to support go interacting with the Linux Virtual Server.
 

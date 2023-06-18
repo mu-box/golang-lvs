@@ -1,9 +1,3 @@
-// Copyright (c) 2016 Pagoda Box Inc
-//
-// This Source Code Form is subject to the terms of the Mozilla Public License, v.
-// 2.0. If a copy of the MPL was not distributed with this file, You can obtain one
-// at http://mozilla.org/MPL/2.0/.
-//
 package lvs
 
 import (
@@ -150,10 +144,10 @@ func (i Ipvs) StartDaemon() (error, error) {
 	if i.MulticastInterface != "" {
 		var err1, err2 error
 		if i.Syncid > 0 {
-			err1 = backend("ipvsadm", "--start-daemon", "master", "--mcast-interface", i.MulticastInterface, "--syncid", string(i.Syncid))
+			err1 = backend("ipvsadm", "--start-daemon", "primary", "--mcast-interface", i.MulticastInterface, "--syncid", string(i.Syncid))
 			err2 = backend("ipvsadm", "--start-daemon", "backup", "--mcast-interface", i.MulticastInterface, "--syncid", string(i.Syncid))
 		} else {
-			err1 = backend("ipvsadm", "--start-daemon", "master", "--mcast-interface", i.MulticastInterface)
+			err1 = backend("ipvsadm", "--start-daemon", "primary", "--mcast-interface", i.MulticastInterface)
 			err2 = backend("ipvsadm", "--start-daemon", "backup", "--mcast-interface", i.MulticastInterface)
 		}
 		return err1, err2
@@ -164,7 +158,7 @@ func (i Ipvs) StartDaemon() (error, error) {
 func (i Ipvs) StopDaemon() (error, error) {
 	if i.MulticastInterface != "" {
 		var err1, err2 error
-		err1 = backend("ipvsadm", "--stop-daemon", "master")
+		err1 = backend("ipvsadm", "--stop-daemon", "primary")
 		err2 = backend("ipvsadm", "--stop-daemon", "backup")
 		return err1, err2
 	}
